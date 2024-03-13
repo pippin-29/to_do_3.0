@@ -17,20 +17,22 @@ t_cleanup_function cleanup(t_program *program)
 		free(program);
 }
 
-void	init_program(t_program **program)
+void	init_program(t_program *program, char **argv)
 {
-		*program = malloc(sizeof(t_program));
-		**program = (t_program){0};
-		(*program)->line = malloc(sizeof(char) * 5);
+		
+		(void)program;
+		(void)argv;
+
 }
 
 int main (int argc, char **argv)
 {
 	t_program *program;
 
-	init_program(&program); 
+	program = malloc(sizeof(t_program));
+	*program = (t_program){0};
 	if (argc == 1)
 		error_exit("Parameter Not Set!\n", 555, program, cleanup);
-	(void)argv;
+	init_program(program, argv); 
 	return (0);
 }
