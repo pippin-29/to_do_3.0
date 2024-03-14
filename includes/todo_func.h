@@ -16,12 +16,14 @@
 	EXIT_C 
 */
 // Assign cleanup with type t_cleanup_function or void
-void	error_exit(char *mess, int error_type, t_program *strct, p_cleanup_function cleanup);
+void				error_exit(char *mess, int error_type, t_program *strct, p_cleanup_function cleanup);
 
 /* 
 	MAIN_C 
 */
 t_cleanup_function	cleanup(t_program *program);
+void				init_(t_program *program, char **argv);
+void				run_(t_program *program);
 
 
 

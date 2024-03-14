@@ -17,11 +17,23 @@ t_cleanup_function cleanup(t_program *program)
 		free(program);
 }
 
-void	init_program(t_program *program, char **argv)
+int		check_file(t_program *program, char *filename)
 {
-		
-		(void)program;
-		(void)argv;
+	if (access(filename, R_OK) == -1)
+		error_exit("Could Not Find Or Access File, Please Check Permissions\n", 42, program, cleanup);
+	else
+	program->fd1 = open(filename, O_RDONLY);
+
+
+}
+
+void	init_(t_program *program, char **argv)
+{
+	check_file(program, argv[1]);
+}
+
+void	run_(t_program *program)
+{
 
 }
 
@@ -33,6 +45,13 @@ int main (int argc, char **argv)
 	*program = (t_program){0};
 	if (argc == 1)
 		error_exit("Parameter Not Set!\n", 555, program, cleanup);
-	init_program(program, argv); 
+	if (argc == 2)
+	{
+		init_(program, argv);
+		run_(program);
+	}
+	else
+		error_exit("Too Many Paramaters Set!", 555, program, cleanup);
+	
 	return (0);
 }
